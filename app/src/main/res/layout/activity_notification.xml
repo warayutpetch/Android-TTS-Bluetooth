@@ -30,12 +30,20 @@
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="124dp"
+        android:layout_marginBottom="60dp"
         android:text="TextView"
         android:textColor="#000"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/bt_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="339dp"
+        android:layout_height="405dp"
+        tools:layout_editor_absoluteX="36dp"
+        tools:layout_editor_absoluteY="46dp"
+        tools:srcCompat="@tools:sample/avatars" />
 
 </android.support.constraint.ConstraintLayout>

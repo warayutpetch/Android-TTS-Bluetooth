@@ -48,7 +48,7 @@ public class View1 extends Activity {
     public void onBackPressed() {
         final AlertDialog.Builder dialog = new AlertDialog.Builder(this);
         dialog.setTitle("Exit");
-        dialog.setIcon(R.drawable.bsl);
+        dialog.setIcon(R.drawable.bt_logo);
         dialog.setCancelable(true);
         dialog.setMessage("ต้องการออกจากโปรแกรมหรือไม่?");
         dialog.setPositiveButton("ใช่", new DialogInterface.OnClickListener() {

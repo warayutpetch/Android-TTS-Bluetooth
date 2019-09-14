@@ -56,6 +56,7 @@ public class MainActivity extends Activity {
     Uri uriAlarm;
     Ringtone ringTone;
     TextView textInfo, textStatus, textTest, textResult;
+    ImageView imgLocation;
     ListView listViewPairedDevice;
     LinearLayout inputPane;
     EditText inputField;
@@ -77,7 +78,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main); //เริ่มต้นเรียกหน้า main ขึ้นมา
 //        MyTTS.getInstance(MainActivity.this).setLocale(new Locale("th"));
 //        MyTTS.getInstance(MainActivity.this).speak("เลือกอุปกรณ์ที่ต้องการเชื่อมต่อ");
         textInfo = (TextView) findViewById(R.id.info);
@@ -102,7 +103,7 @@ public class MainActivity extends Activity {
             }
         });
 
-        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) {
+        if (!getPackageManager().hasSystemFeature(PackageManager.FEATURE_BLUETOOTH)) { /// เช็คว่าอุปกรณ์ Support Bluetooth มั้ย
             Toast.makeText(this,
                     "FEATURE_BLUETOOTH NOT support",
                     Toast.LENGTH_LONG).show();
@@ -160,7 +161,7 @@ public class MainActivity extends Activity {
                     android.R.layout.simple_list_item_1, s); /// เอารายการที่ถูกจับคู่มาแสดงใน listView
             listViewPairedDevice.setAdapter(pairedDeviceAdapter);
 
-            listViewPairedDevice.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            listViewPairedDevice.setOnItemClickListener(new AdapterView.OnItemClickListener() { /// เช็คว่าเรากดรายการไหนแล้วเริ่มทำการเชื่อมต่อ
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
@@ -171,7 +172,7 @@ public class MainActivity extends Activity {
                     for (Iterator<BluetoothDevice> it = pairedDevices.iterator(); it.hasNext(); ) {
                         BluetoothDevice bt = it.next();
 
-                        if (bt.getName().equals(selected)) {
+                        if (bt.getName().equals(selected)) { // ถ้าตรงที่คลิก ให้เริ่มทำการเชื่อมต่อ
 
                             myThreadConnectBTdevice = new ThreadConnectBTdevice(bt); //เรียกฟังก์ชั่นเชื่อมต่อ
                             myThreadConnectBTdevice.start(); // เริ่มกระบวนการเชื่อมต่อ
@@ -223,7 +224,7 @@ public class MainActivity extends Activity {
     private void startThreadConnected(BluetoothSocket socket) {
 
         myThreadConnected = new ThreadConnected(socket); //เมื่อเชื่อมต่อสำเร็จให้เริ่มกระบวนการรับข้อมูล
-        myThreadConnected.start();
+        myThreadConnected.start(); /// เริ่มเทรดรับส่งข้อมูล
     }
 
     /*
@@ -293,6 +294,8 @@ public class MainActivity extends Activity {
                             ll.setBackgroundResource(R.drawable.location);
                             textResult = (TextView) findViewById(R.id.textRes);
                             textResult.setText("ไม่พบสถานที่");
+                            imgLocation= (ImageView) findViewById(R.id.imageView);
+                            imgLocation.setImageResource(R.drawable.img_404);
                             MyTTS.getInstance(MainActivity.this).setLocale(new Locale("th"));
                             MyTTS.getInstance(MainActivity.this).speak("ไม่พบสถานที่");
                             //  leftTop,topCenter,rightTop,leftCenter,centerLeft,center,centerRight,rightCenter,leftBot,centerBot,rightBot
@@ -401,6 +404,8 @@ public class MainActivity extends Activity {
 //                                ll.setBackgroundResource(R.drawable.location);
                                     textResult = (TextView) findViewById(R.id.textRes);
                                     textResult.setText("อาคาร 18 อาคารเรียนรวมสาขาวิชาไฟฟ้า");
+                                    imgLocation= (ImageView) findViewById(R.id.imageView);
+                                    imgLocation.setImageResource(R.drawable.img_18);
                                     MyTTS.getInstance(MainActivity.this).setLocale(new Locale("th")); ///เซ็ตเสียงให้พูดเป็นภาษาไทย
                                     MyTTS.getInstance(MainActivity.this).speak("อาคาร 18 อาคารเรียนรวมสาขาวิชาไฟฟ้า"); ///สั่งให้พูดคำที่ส่งไป
 
@@ -413,6 +418,8 @@ public class MainActivity extends Activity {
 //                                ll.setBackgroundResource(R.drawable.location);
                                     textResult = (TextView) findViewById(R.id.textRes);
                                     textResult.setText("อาคาร 36 คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์");
+                                    imgLocation= (ImageView) findViewById(R.id.imageView);
+                                    imgLocation.setImageResource(R.drawable.img_36);
                                     MyTTS.getInstance(MainActivity.this).setLocale(new Locale("th"));
                                     MyTTS.getInstance(MainActivity.this).speak("อาคาร 36 คณะวิศวกรรมศาสตร์และสถาปัตยกรรมศาสตร์");
 
@@ -423,6 +430,8 @@ public class MainActivity extends Activity {
 //                                ll.setBackgroundResource(R.drawable.location);
                                     textResult = (TextView) findViewById(R.id.textRes);
                                     textResult.setText("อาคาร 35 อาคารเรียนรวม");
+                                    imgLocation= (ImageView) findViewById(R.id.imageView);
+                                    imgLocation.setImageResource(R.drawable.img_35);
                                     MyTTS.getInstance(MainActivity.this).setLocale(new Locale("th"));
                                     MyTTS.getInstance(MainActivity.this).speak("อาคาร 35 อาคารเรียนรวม");
 
@@ -433,6 +442,8 @@ public class MainActivity extends Activity {
 //                                ll.setBackgroundResource(R.drawable.location);
                                     textResult = (TextView) findViewById(R.id.textRes);
                                     textResult.setText("หอพักนักศึกษา");
+                                    imgLocation= (ImageView) findViewById(R.id.imageView);
+                                    imgLocation.setImageResource(R.drawable.img_dom);
                                     MyTTS.getInstance(MainActivity.this).setLocale(new Locale("th"));
                                     MyTTS.getInstance(MainActivity.this).speak("หอพักนักศึกษา");
 
@@ -443,6 +454,8 @@ public class MainActivity extends Activity {
 //                                ll.setBackgroundResource(R.drawable.location);
                                     textResult = (TextView) findViewById(R.id.textRes);
                                     textResult.setText("โรงอาหาร ม ท ร อีสาน");
+                                    imgLocation= (ImageView) findViewById(R.id.imageView);
+                                    imgLocation.setImageResource(R.drawable.img_canteen);
                                     MyTTS.getInstance(MainActivity.this).setLocale(new Locale("th"));
                                     MyTTS.getInstance(MainActivity.this).speak("โรงอาหาร ม ท ร อีสาน");
 
@@ -453,6 +466,8 @@ public class MainActivity extends Activity {
 //                                ll.setBackgroundResource(R.drawable.location);
                                     textResult = (TextView) findViewById(R.id.textRes);
                                     textResult.setText("ไม่พบสถานที่");
+                                    imgLocation= (ImageView) findViewById(R.id.imageView);
+                                    imgLocation.setImageResource(R.drawable.img_404);
                                     MyTTS.getInstance(MainActivity.this).setLocale(new Locale("th"));
                                     MyTTS.getInstance(MainActivity.this).speak("ไม่พบสถานที่");
                                 }
